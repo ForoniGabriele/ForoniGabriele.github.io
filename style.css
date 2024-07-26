@@ -57,23 +57,23 @@ main {
 }
 
 .size-15 {
-    font-size: 2.5vh;
+    font-size: 2.5em;
 }
 
 .size-22 {
-    font-size: 3.7vh;
+    font-size: 3.7em;
 }
 
 .size-30 {
-    font-size: 4.8vh;
+    font-size: 4.8em;
 }
 
 .size-35 {
-    font-size: 5.7vh;
+    font-size: 5.7em;
 }
 
 .size-48 { 
-    font-size: 7vh;
+    font-size: 7em;
 }
 
 .weight-400 {
@@ -86,11 +86,11 @@ main {
 }
 
 footer { 
-    margin-top: 2vh;
+    margin-top: 2em;
 }
 
 svg {
-    margin: 0 2vh 0 2vh;
+    margin: 0 2em 0 2em;
 }
 
 .altro {
