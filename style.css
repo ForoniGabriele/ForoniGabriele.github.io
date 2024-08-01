@@ -47,6 +47,10 @@ main {
     background-color: aliceblue;
 }
 
+.center {
+    text-align: center;
+}
+
 .container {
     display: flex;
     align-items: center;
@@ -96,4 +100,25 @@ svg {
 .altro {
     flex: 1;
     text-align: center;
+}
+
+.grid-container {
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    grid-template-columns: auto auto auto;
+    padding: 10px;
+    grid-gap: 2em;
+}
+
+.grid-item {
+    border-radius: 3%;
+    border: #00adef solid 1px;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+}
+
+.grid-item > img {
+    margin-left: auto;
+    margin-right: auto;
 }
