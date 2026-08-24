@@ -1,0 +1,31 @@
+﻿---
+import '../styles/global.css'
+
+interface Props {
+  title?: string
+  description?: string
+}
+
+const {
+  title = 'Gabriele Foroni | Cyber Security & DevOps Portfolio',
+  description = 'Portfolio tecnico di Gabriele Foroni, studente Cyber Security e DevOps focalizzato su cloud automation, IaC, monitoring e DevSecOps.',
+} = Astro.props
+---
+
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta name="theme-color" content="#0f172a" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

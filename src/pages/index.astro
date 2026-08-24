@@ -1,0 +1,180 @@
+﻿---
+import BaseLayout from '@/layouts/BaseLayout.astro'
+
+const skills = ['AWS', 'Pulumi', 'Python', 'Docker', 'Linux', 'CI/CD', 'CloudWatch', 'DevSecOps', 'Networking', 'Grafana', 'NetBox', 'PHP']
+
+const experiences = [
+  {
+    role: 'DevOps Engineer',
+    company: 'Webranking',
+    type: 'Stage',
+    period: 'giu 2026 - presente',
+    place: 'Correggio, Emilia Romagna',
+    points: [
+      'Formazione specialistica su AWS Cloud Practitioner Essentials e Google Cloud Fundamentals.',
+      'Progettazione di infrastruttura cloud multi-regione su AWS con Pulumi e Python.',
+      'Implementazione di pipeline CI/CD, controlli DevSecOps, disaster recovery e integrazione AI con Amazon Bedrock.',
+    ],
+  },
+  {
+    role: 'Sistemista',
+    company: 'NETandWORK',
+    type: 'Tempo pieno',
+    period: 'lug 2025 - ott 2025',
+    place: 'Correggio, Emilia Romagna',
+    points: [
+      'Sviluppo di un sistema PHP per monitorare router Mikrotik aziendali.',
+      'Documentazione e gestione dell’infrastruttura di rete tramite NetBox.',
+    ],
+  },
+  {
+    role: 'Stagista - Sistemista',
+    company: 'NETandWORK',
+    type: 'Stage',
+    period: 'feb 2025',
+    place: 'Correggio, Emilia Romagna',
+    points: ['Configurazione server Ookla in ambienti distribuiti tra Correggio e Bologna.'],
+  },
+  {
+    role: 'Stagista - Analista dati',
+    company: 'NETandWORK',
+    type: 'Stage',
+    period: 'feb 2024 - mar 2024',
+    place: 'Correggio, Emilia Romagna',
+    points: ['Creazione di dashboard e grafici operativi con Grafana.'],
+  },
+]
+
+const projects = [
+  {
+    title: 'AI DevSecOps Runtime & Remediation Platform',
+    label: 'Case study Webranking',
+    period: '2026',
+    description: 'Progetto sviluppato durante lo stage per esplorare automazione DevSecOps, triage runtime e remediation assistita da AI su AWS.',
+    details: [
+      'Normalizzazione dei finding prodotti da scanner security e incidenti runtime.',
+      'Archiviazione evidenze in S3, catalogazione problemi in DynamoDB e audit delle analisi AI.',
+      'Integrazione con CloudWatch, Sentry e New Relic per eventi runtime.',
+      'Remediation proposta tramite Pull Request separata, verificata da CodeBuild e soggetta a review umana.',
+    ],
+    stack: ['AWS', 'Pulumi', 'Python', 'Bedrock', 'S3', 'DynamoDB', 'CloudWatch', 'CodeBuild'],
+    featured: true,
+    tone: 'teal',
+  },
+  {
+    title: 'Webapp + IaC AWS',
+    label: 'Architettura cloud',
+    period: 'giu 2026 - set 2026',
+    description: 'Architettura multi-regione per una libreria online, con focus su automazione, sicurezza e disaster recovery.',
+    details: ['Infrastructure as Code con Pulumi e Python.', 'Disaster recovery tra eu-north-1 ed eu-central-1 con failover orchestrato.', 'Pipeline GitHub Actions con test, security scan e deploy a ogni commit.'],
+    stack: ['AWS', 'Pulumi', 'GitHub Actions', 'PowerShell', 'Security scanning'],
+    tone: 'amber',
+  },
+  {
+    title: 'Sito iscrizione e tesseramento atleti',
+    label: 'Web application',
+    period: 'apr 2025 - presente',
+    description: 'Applicazione web per gestire dati di atleti e genitori, generare documenti PDF e stampare ricevute di pagamento.',
+    details: ['Form HTML collegati a database.', 'Generazione automatica di documenti PDF per stampa, firma e consegna.', 'Pagina dedicata per gestione e stampa ricevute.'],
+    stack: ['HTML', 'CSS', 'Database', 'PDF generation', 'Problem solving'],
+    tone: 'green',
+  },
+  {
+    title: 'Monitoraggio router Mikrotik',
+    label: 'Networking',
+    period: '2025',
+    description: 'Sistema PHP per monitorare router Mikrotik aziendali e supportare la gestione operativa della rete.',
+    details: ['Raccolta e visualizzazione dati di rete.', 'Documentazione infrastrutturale con NetBox.'],
+    stack: ['PHP', 'Mikrotik', 'NetBox', 'Docker', 'Networking'],
+    tone: 'coral',
+  },
+]
+---
+
+<BaseLayout>
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="Torna all'inizio"><span class="brand-mark">GF</span><span>Gabriele Foroni</span></a>
+    <nav class="nav" aria-label="Navigazione principale"><a href="#projects">Progetti</a><a href="#experience">Esperienza</a><a href="#contact">Contatti</a></nav>
+  </header>
+
+  <main id="top">
+    <section class="hero section">
+      <div class="hero-copy">
+        <p class="eyebrow">Cyber Security & DevOps student</p>
+        <h1>Cloud automation, sicurezza e monitoring con mentalità da incident response.</h1>
+        <p class="hero-text">Sono Gabriele, ho 20 anni e sto costruendo competenze tra infrastrutture cloud, Infrastructure as Code, pipeline CI/CD, networking e DevSecOps.</p>
+        <div class="hero-actions"><a class="button primary" href="#projects">Vedi progetti</a><a class="button secondary" href="#contact">Contattami</a></div>
+        <div class="proof-strip" aria-label="Aree principali"><span>AWS</span><span>IaC</span><span>CI/CD</span><span>Runtime triage</span></div>
+      </div>
+
+      <div class="ops-console" aria-label="Dashboard visuale DevOps">
+        <div class="console-header"><span></span><span></span><span></span><strong>devsecops-control-plane</strong></div>
+        <div class="console-grid">
+          <div class="signal-card wide">
+            <small>pipeline</small>
+            <div class="flow"><span>scan</span><i></i><span>evidence</span><i></i><span>review</span><i></i><span>PR</span></div>
+          </div>
+          <div class="signal-card health"><small>runtime</small><strong>ALARM</strong><span>triage AI</span></div>
+          <div class="signal-card"><small>IaC</small><strong>Pulumi</strong><span>Python</span></div>
+          <div class="signal-card"><small>DR</small><strong>multi-region</strong><span>failover</span></div>
+          <div class="terminal-card">
+            <p><span>$</span> cloudwatch event normalize</p>
+            <p><span>✓</span> evidence saved to s3</p>
+            <p><span>✓</span> problem catalog updated</p>
+            <p><span>→</span> remediation requires review</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section intro-grid" aria-label="Profilo sintetico">
+      <div><p class="section-kicker">Profilo</p><h2>Un percorso tecnico tra cloud, rete e sicurezza.</h2></div>
+      <p>Mi interessano i sistemi che restano comprensibili anche quando diventano complessi: automazione, osservabilità, documentazione tecnica e processi di sicurezza verificabili.</p>
+    </section>
+
+    <section class="section" id="projects">
+      <div class="section-heading"><p class="section-kicker">Progetti</p><h2>Case study selezionati</h2></div>
+      <div class="projects">
+        {projects.map((project) => (
+          <article class:list={['project-card', project.featured && 'featured', `tone-${project.tone}`]}>
+            <div class="project-topline"><span>{project.label}</span><span>{project.period}</span></div>
+            <div class="project-copy">
+              <h3>{project.title}</h3>
+              <p>{project.description}</p>
+            </div>
+            <div class="project-details">
+              <ul>{project.details.map((detail) => <li>{detail}</li>)}</ul>
+              <div class="tags">{project.stack.map((item) => <span>{item}</span>)}</div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="section split-section">
+      <div class="panel skill-panel"><p class="section-kicker">Competenze</p><h2>Stack tecnico</h2><div class="skill-cloud">{skills.map((skill) => <span>{skill}</span>)}</div></div>
+      <div class="panel approach-panel"><p class="section-kicker">Approccio</p><h2>Come lavoro</h2><ul class="plain-list"><li>Documento le scelte tecniche e i limiti del sistema.</li><li>Preferisco automazioni verificabili e rollback chiari.</li><li>Tratto sicurezza e monitoring come parte del ciclo di sviluppo.</li></ul></div>
+    </section>
+
+    <section class="section" id="experience">
+      <div class="section-heading"><p class="section-kicker">Esperienza</p><h2>Timeline professionale</h2></div>
+      <div class="timeline">
+        {experiences.map((item) => (
+          <article class="timeline-item">
+            <div class="timeline-date">{item.period}</div>
+            <div class="timeline-content">
+              <div class="role-row"><h3>{item.role}</h3><span>{item.type}</span></div>
+              <p class="company">{item.company} · {item.place}</p>
+              <ul>{item.points.map((point) => <li>{point}</li>)}</ul>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="section contact" id="contact">
+      <div><p class="section-kicker">Contatti</p><h2>Parliamo di cloud, sicurezza o automazione.</h2></div>
+      <div class="contact-actions"><a class="button primary" href="mailto:gabriele.foroni@example.com">Email</a><a class="button secondary" href="https://www.linkedin.com/in/gabriele-foroni/" rel="noreferrer">LinkedIn</a><a class="button secondary" href="https://github.com/" rel="noreferrer">GitHub</a></div>
+    </section>
+  </main>
+</BaseLayout>
