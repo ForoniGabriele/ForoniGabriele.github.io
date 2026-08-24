@@ -1,37 +1,101 @@
 ﻿---
-import '../styles/global.css'
-
-.container {
-  max-width: 1120px;
-  margin: 0 auto;
-  padding: 0 1.5rem;
+// src/layouts/Layout.astro
+export interface Props {
+  title: string;
+  description?: string;
+  image?: string;
 }
 
-interface Props {
-  title?: string
-  description?: string
-}
-
-const {
-  title = 'Gabriele Foroni | Cyber Security & DevOps Portfolio',
-  description = 'Portfolio tecnico di Gabriele Foroni, studente Cyber Security e DevOps focalizzato su cloud automation, IaC, monitoring e DevSecOps.',
-} = Astro.props
+const { title, description = "Portfolio di Gabriele Foroni", image } = Astro.props;
 ---
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="it">
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
+    
+    <!-- Open Graph / Social -->
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
-    <meta name="theme-color" content="#0f172a" />
-    <title>{title}</title>
+    {image && <meta property="og:image" content={image} />}
+    
+    <!-- Font Google (opzionale, puoi cambiare font) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet" />
+
+    <style is:global>
+      /* RESET & BASE */
+      *,
+      *::before,
+      *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        background: #ffffff;
+        color: #212529;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      /* CONTAINER (usato in index.astro) */
+      .container {
+        max-width: 1120px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+      }
+
+      /* LINK di base */
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      /* IMMAGINI responsive */
+      img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      /* SELEZIONE testo */
+      ::selection {
+        background: #6366f1;
+        color: #ffffff;
+      }
+
+      /* SCROLLBAR (sottile) */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #f1f3f5;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #d1d5db;
+        border-radius: 10px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #9ca3af;
+      }
+    </style>
   </head>
   <body>
+    <!-- QUI VIENE INSERITO IL CONTENUTO DELLE PAGINE -->
     <slot />
   </body>
 </html>
