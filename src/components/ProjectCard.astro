@@ -1,0 +1,103 @@
+---
+// src/components/ProjectCard.astro
+export interface Props {
+  title: string;
+  description: string;
+  tags: string[];
+  link: string;
+}
+
+const { title, description, tags, link } = Astro.props;
+---
+
+<a href={link} class="project-card">
+  <div class="project-content">
+    <h3 class="project-title">{title}</h3>
+    <p class="project-description">{description}</p>
+    <div class="project-tags">
+      {tags.map((tag) => (
+        <span class="tag">{tag}</span>
+      ))}
+    </div>
+    <span class="project-arrow">→</span>
+  </div>
+</a>
+
+<style>
+  .project-card {
+    display: block;
+    background: #ffffff;
+    border-radius: 24px;
+    padding: 1.8rem;
+    border: 1px solid #f1f3f5;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+  .project-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #6366f1, #8b5cf6);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .project-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 48px rgba(0,0,0,0.07);
+    border-color: #e9ecef;
+  }
+  .project-card:hover::before {
+    opacity: 1;
+  }
+  .project-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  .project-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    color: #212529;
+  }
+  .project-description {
+    color: #495057;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
+    font-size: 0.95rem;
+  }
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .tag {
+    background: #f1f3f5;
+    padding: 0.25rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #495057;
+    letter-spacing: 0.02em;
+  }
+  .project-arrow {
+    align-self: flex-end;
+    font-size: 1.5rem;
+    color: #6366f1;
+    transition: transform 0.2s ease;
+    line-height: 1;
+  }
+  .project-card:hover .project-arrow {
+    transform: translateX(6px);
+  }
+</style>
