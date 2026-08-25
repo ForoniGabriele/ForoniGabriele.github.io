@@ -3,6 +3,7 @@
 import Layout from '../layouts/BaseLayout.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import { projects } from '../data/projects';
 ---
 
 <Layout title={SITE_TITLE} description={SITE_DESCRIPTION}>
@@ -132,21 +133,18 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
     <div class="container">
       <div class="section-header">
         <h2>Progetti</h2>
-        <p>Progetti personali e professionali che raccontano il mio approccio.</p>
       </div>
       <div class="projects-grid">
-        <ProjectCard 
-          title="Webapp + IaC AWS"
-          description="Infrastruttura AWS multi-regione per libreria online con Pulumi (Python). Include DR, pipeline CI/CD, DevSecOps e integrazione AI con Bedrock per remediation automatica. Tutto documentato in markdown."
-          tags={["AWS", "Pulumi", "Python", "Bedrock", "GitHub Actions"]}
-          link="#"
-        />
-        <ProjectCard 
-          title="Sito Iscrizioni Atleti"
-          description="Piattaforma per la gestione di atleti e genitori con form HTML e database. Generazione automatica di PDF per firma e stampa, gestione ricevute pagamento. Ottimizza l'efficienza amministrativa."
-          tags={["HTML", "PHP", "Database", "PDF Generation"]}
-          link="#"
-        />
+        {projects.map((project) => (
+          <ProjectCard
+            title={project.title}
+            subtitle={project.subtitle}
+            period={project.period}
+            description={project.description}
+            tags={project.stack.slice(0, 5)}
+            link={`/projects/${project.slug}/`}
+          />
+        ))}
       </div>
     </div>
   </section>

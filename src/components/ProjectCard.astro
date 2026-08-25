@@ -1,25 +1,30 @@
 ---
-// src/components/ProjectCard.astro
 export interface Props {
-  title: string;
-  description: string;
-  tags: string[];
-  link: string;
+  title: string
+  description: string
+  tags: string[]
+  link: string
+  subtitle?: string
+  period?: string
 }
 
-const { title, description, tags, link } = Astro.props;
+const { title, description, tags, link, subtitle, period } = Astro.props
 ---
 
-<a href={link} class="project-card">
+<a href={link} class="project-card" aria-label={`Apri il progetto ${title}`}>
   <div class="project-content">
+    {(subtitle || period) && (
+      <div class="project-meta">
+        {subtitle && <span>{subtitle}</span>}
+        {period && <span>{period}</span>}
+      </div>
+    )}
     <h3 class="project-title">{title}</h3>
     <p class="project-description">{description}</p>
     <div class="project-tags">
-      {tags.map((tag) => (
-        <span class="tag">{tag}</span>
-      ))}
+      {tags.map((tag) => <span class="tag">{tag}</span>)}
     </div>
-    <span class="project-arrow">→</span>
+    
   </div>
 </a>
 
@@ -49,18 +54,31 @@ const { title, description, tags, link } = Astro.props;
     opacity: 0;
     transition: opacity 0.3s ease;
   }
-  .project-card:hover {
+  .project-card:hover,
+  .project-card:focus-visible {
     transform: translateY(-8px);
     box-shadow: 0 20px 48px rgba(0,0,0,0.07);
     border-color: #e9ecef;
+    outline: none;
   }
-  .project-card:hover::before {
+  .project-card:hover::before,
+  .project-card:focus-visible::before {
     opacity: 1;
   }
   .project-content {
     display: flex;
     flex-direction: column;
     height: 100%;
+  }
+  .project-meta {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    color: #6c757d;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
   }
   .project-title {
     font-size: 1.4rem;
@@ -91,13 +109,15 @@ const { title, description, tags, link } = Astro.props;
     letter-spacing: 0.02em;
   }
   .project-arrow {
-    align-self: flex-end;
-    font-size: 1.5rem;
+    align-self: flex-start;
     color: #6366f1;
+    font-size: 0.92rem;
+    font-weight: 700;
     transition: transform 0.2s ease;
     line-height: 1;
   }
-  .project-card:hover .project-arrow {
+  .project-card:hover .project-arrow,
+  .project-card:focus-visible .project-arrow {
     transform: translateX(6px);
   }
 </style>

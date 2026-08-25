@@ -1,0 +1,255 @@
+---
+import Layout from '../../layouts/BaseLayout.astro'
+import { projects, type Project } from '../../data/projects'
+import { SITE_TITLE } from '../../consts'
+
+export function getStaticPaths() {
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }))
+}
+
+interface Props {
+  project: Project
+}
+
+const { project } = Astro.props
+const otherProjects = projects.filter((item) => item.slug !== project.slug).slice(0, 3)
+---
+
+<Layout title={`${project.title} | ${SITE_TITLE}`} description={project.description}>
+  <main>
+    <section class="project-hero">
+      <div class="container project-hero-grid">
+        <div>
+          <a class="back-link" href="/#projects">← Torna ai progetti</a>
+          <p class="project-kicker">{project.subtitle} · {project.period}</p>
+          <h1>{project.title}</h1>
+          <p class="project-lead">{project.summary}</p>
+          <div class="project-tags hero-tags">
+            {project.stack.map((tag) => <span class="tag">{tag}</span>)}
+          </div>
+        </div>
+        <aside class="project-snapshot" aria-label="Sintesi del progetto">
+          <span class="snapshot-label">Obiettivo</span>
+          <p>{project.objective}</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="project-body">
+      <div class="container detail-grid">
+        <article class="detail-main">
+          <section class="detail-section">
+            <h2>Contesto</h2>
+            <p>{project.context}</p>
+          </section>
+
+          <section class="detail-section">
+            <h2>Cosa ho fatto</h2>
+            <ul class="detail-list">
+              {project.responsibilities.map((item) => <li>{item}</li>)}
+            </ul>
+          </section>
+
+          <section class="detail-section">
+            <h2>Punti tecnici rilevanti</h2>
+            <ul class="detail-list">
+              {project.highlights.map((item) => <li>{item}</li>)}
+            </ul>
+          </section>
+
+          <section class="detail-section">
+            <h2>Risultato</h2>
+            <ul class="detail-list">
+              {project.outcome.map((item) => <li>{item}</li>)}
+            </ul>
+          </section>
+
+          {project.securityNotes && (
+            <section class="detail-section security-note">
+              <h2>Nota su privacy e sicurezza</h2>
+              <ul class="detail-list">
+                {project.securityNotes.map((item) => <li>{item}</li>)}
+              </ul>
+            </section>
+          )}
+        </article>
+
+        <aside class="detail-aside">
+          <div class="aside-card">
+            <h2>Tecnologie usate</h2>
+            <div class="project-tags">
+              {project.stack.map((tag) => <span class="tag">{tag}</span>)}
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .project-hero {
+    padding: 5.5rem 0 4rem;
+    background:
+      radial-gradient(circle at 18% 20%, rgba(99,102,241,0.16), transparent 32%),
+      linear-gradient(145deg, #f8f9fa 0%, #ffffff 100%);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+  }
+  .project-hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.75fr);
+    gap: 3rem;
+    align-items: end;
+  }
+  .back-link {
+    display: inline-flex;
+    margin-bottom: 1.8rem;
+    color: #6366f1;
+    font-weight: 700;
+  }
+  .project-kicker {
+    margin-bottom: 1rem;
+    color: #6c757d;
+    font-size: 0.85rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  h1 {
+    max-width: 860px;
+    margin-bottom: 1.4rem;
+    color: #212529;
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    line-height: 0.98;
+  }
+  .project-lead {
+    max-width: 780px;
+    color: #495057;
+    font-size: 1.18rem;
+    line-height: 1.75;
+  }
+  .project-snapshot,
+  .detail-section,
+  .aside-card {
+    border: 1px solid #f1f3f5;
+    background: #ffffff;
+    box-shadow: 0 20px 52px rgba(0,0,0,0.05);
+  }
+  .project-snapshot {
+    border-radius: 28px;
+    padding: 2rem;
+  }
+  .snapshot-label {
+    display: inline-block;
+    margin-bottom: 1rem;
+    color: #6366f1;
+    font-size: 0.78rem;
+    font-weight: 800;
+    text-transform: uppercase;
+  }
+  .project-snapshot p {
+    color: #212529;
+    font-size: 1.05rem;
+    line-height: 1.7;
+  }
+  .project-body {
+    padding: 4.5rem 0;
+    background: #ffffff;
+  }
+  .detail-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 320px;
+    gap: 2rem;
+    align-items: start;
+  }
+  .detail-main {
+    display: grid;
+    gap: 1.4rem;
+  }
+  .detail-section,
+  .aside-card {
+    border-radius: 24px;
+    padding: 2rem;
+  }
+  .detail-section h2,
+  .aside-card h2 {
+    margin-bottom: 1rem;
+    color: #212529;
+    font-size: 1.45rem;
+  }
+  .detail-section p,
+  .detail-list {
+    color: #495057;
+    font-size: 1rem;
+    line-height: 1.75;
+  }
+  .detail-list {
+    margin: 0;
+    padding-left: 1.2rem;
+  }
+  .detail-list li + li {
+    margin-top: 0.65rem;
+  }
+  .security-note {
+    border-color: rgba(99,102,241,0.28);
+    background: #f7f7ff;
+  }
+  .detail-aside {
+    position: sticky;
+    top: 1.5rem;
+    display: grid;
+    gap: 1rem;
+  }
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .hero-tags {
+    margin-top: 1.7rem;
+  }
+  .tag {
+    background: #f1f3f5;
+    padding: 0.28rem 0.8rem;
+    border-radius: 20px;
+    color: #495057;
+    font-size: 0.78rem;
+    font-weight: 600;
+  }
+  .related-list {
+    display: grid;
+    gap: 0.75rem;
+  }
+  .related-list a {
+    display: grid;
+    gap: 0.2rem;
+    border: 1px solid #f1f3f5;
+    border-radius: 16px;
+    padding: 0.9rem;
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+  .related-list a:hover,
+  .related-list a:focus-visible {
+    border-color: #6366f1;
+    transform: translateY(-2px);
+    outline: none;
+  }
+  .related-list span {
+    color: #6c757d;
+    font-size: 0.86rem;
+  }
+  @media (max-width: 860px) {
+    .project-hero-grid,
+    .detail-grid {
+      grid-template-columns: 1fr;
+    }
+    .detail-aside {
+      position: static;
+    }
+  }
+</style>
